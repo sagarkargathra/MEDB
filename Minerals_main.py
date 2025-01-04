@@ -58,11 +58,28 @@ def extract_footnotes(file_path):
 # Function to process and read Excel files
 def read_and_process_excel(file_path):
     footnotes_dict = extract_footnotes(file_path)
+
+    # Load the workbook and sheet
+    workbook = openpyxl.load_workbook(file_path)
+    sheet = workbook.active
+
+    # Unmerge cells and propagate year values
+    for merged_cell in list(sheet.merged_cells.ranges):
+        sheet.unmerge_cells(str(merged_cell))
+        top_left_cell = sheet.cell(merged_cell.min_row, merged_cell.min_col)
+        for row in range(merged_cell.min_row, merged_cell.max_row + 1):
+            for col in range(merged_cell.min_col, merged_cell.max_col + 1):
+                sheet.cell(row, col).value = top_left_cell.value
+
+    workbook.save(file_path)  # Save changes after unmerging
+
+    # Read the data into a DataFrame
     df_full = pd.read_excel(file_path, header=None)
     df = pd.read_excel(file_path, header=1)
     df.columns = df.columns.map(str)
     df.set_index(df.columns[0], inplace=True)
 
+    # Identify and separate Table notes and production values
     def replace_reference(reference):
         if pd.isna(reference):
             return reference
@@ -70,15 +87,18 @@ def read_and_process_excel(file_path):
         replaced_reference = ", ".join([footnotes_dict.get(match.strip(')'), match) for match in matches])
         return replaced_reference.strip()
 
+    # Process the 'Reference' column if it exists
     if 'Reference' in df.columns:
         df['Reference'] = df['Reference'].apply(replace_reference)
 
-    # Remove rows that are identified as "Table notes", "Footnotes", or "Notes"
+    # Remove rows identified as notes
     df = df[~df.index.to_series().apply(is_note_or_footnote).notnull()]
 
-    # Ensure no "Table notes" remains in the Country column
-    df = df[~df.index.str.lower().str.contains('table notes')]
+    # Ensure the index is treated as strings before filtering
+    df = df[~df.index.astype(str).str.lower().str.contains('table notes', na=False)]
 
+
+    # Prepare data for the final DataFrame
     country = []
     year = []
     quantity = []
@@ -86,13 +106,14 @@ def read_and_process_excel(file_path):
     unit = []
     sub_commodity = []
 
+    # Extract unit value
     unit_value = df_full.iloc[0, 1].strip()  # Remove leading/trailing whitespace from unit value
 
     for col in df.columns:
-        if re.match(r'^\d{4}$', col):
+        if re.match(r'^\d{4}$', col):  # Match years
             country.extend(df.index)
             year.extend([col] * len(df))
-            quantity_col = col + ".1"
+            quantity_col = col + ".1"  # Assuming ".1" column contains production values
             quantity.extend(df[quantity_col] if quantity_col in df.columns else ["NA"] * len(df))
             reference.extend(df[col])
             unit.extend([unit_value] * len(df))
@@ -116,6 +137,7 @@ def read_and_process_excel(file_path):
     processed_df['Quantity'].fillna('NA', inplace=True)
     
     return processed_df
+
 
 # Function to organize the notes and footnotes into the required format
 def organize_notes(notes_df):
