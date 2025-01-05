@@ -231,21 +231,32 @@ def process_files_and_merge_notes():
     # Replace all types of whitespace characters, including non-breaking spaces
     merged_df['Unit'] = merged_df['Unit'].apply(lambda x: re.sub(r'\s+', ' ', x).strip() if isinstance(x, str) else x)
 
-    # Convert all values in the 'Quantity' column to strings to ensure left alignment
-    merged_df['Quantity'] = merged_df['Quantity'].apply(lambda x: str(int(float(x))) if isinstance(x, (int, float)) else x)
-
-     # Reorder columns to ensure 'Mineral' and 'Sub-commodity' are first
+    # Reorder columns to ensure 'Mineral' and 'Sub-commodity' are first
     columns_order = ['Mineral', 'Sub-commodity', 'Country', 'Year', 'Quantity', 'Unit', 'Reference', 'Table Notes']
     merged_df = merged_df[columns_order]
 
+    # Extract "Table Notes" data if the column exists
+    if 'Table Notes' in merged_df.columns:
+        table_notes_df = merged_df[['Table Notes']].dropna()
+        # Find indices where the column is filled (non-empty)
+        indices_to_drop = merged_df[merged_df['Table Notes'].notna()].index
+        # Drop all rows with these indices
+        merged_df = merged_df.drop(index=indices_to_drop)
+       
+    else:
+        table_notes_df = pd.DataFrame()
+
+
     output_file = 'output/final.xlsx'
+
     with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
         merged_df.to_excel(writer, sheet_name='Data', index=False)
+        if not table_notes_df.empty:
+            table_notes_df.to_excel(writer, sheet_name='Table Notes', index=False)
 
     final_df = pd.read_excel(output_file, sheet_name='Data')
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
-    print(final_df.head())
     print(f'Final file saved to {output_file}')
 
 # Run the process
