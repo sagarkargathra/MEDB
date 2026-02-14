@@ -50,8 +50,3 @@ include = ["bgs*"]
 [project.urls]
 Documentation = "https://mineral-extraction-database.readthedocs.io/en/latest/index.html"
 
-[project.optional-dependencies]
-docs = [
-  "sphinx>=7.2",
-  "sphinx-rtd-theme>=2.0.0",
-]
