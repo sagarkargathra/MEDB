@@ -5,6 +5,11 @@
 *.sqlite3
 *.db
 ~%*
+*.xls
+*.xlsx
+*.csv
+*.json
+*.log
 
 # Editors
 .vscode/

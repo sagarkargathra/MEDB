@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>World Mineral Archive &#8212; Mineral Extraction Database 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="world-mineral-archive">
+<h1>World Mineral Archive<a class="headerlink" href="#world-mineral-archive" title="Link to this heading">¶</a></h1>
+<p>This documentation describes the BGS ingestion and reporting module.
+The module builds a local SQLite archive from the BGS World Mineral
+Statistics OGC API and provides structured query utilities.</p>
+<p>The project currently supports:</p>
+<ul class="simple">
+<li><p>BGS ingestion (API to SQLite)</p></li>
+<li><p>Local archive management</p></li>
+<li><p>Commodity-specific reporting queries</p></li>
+</ul>
+<p>Future extension:</p>
+<ul class="simple">
+<li><p>USGS ingestion</p></li>
+<li><p>Full packaging</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#repository-structure">Repository Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#module-structure">Module Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ingestion.html">Ingestion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ingestion.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ingestion.html#entry-point">Entry Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ingestion.html#schema-alignment">Schema Alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ingestion.html#derived-columns">Derived Columns</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">Reporting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reporting.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reporting.html#design-principles">Design Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reporting.html#core-functions">Core Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reporting.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#source-structure">Source Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#sqlite-archive">SQLite Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#indexes">Indexes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#build-archive-script">Build Archive Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-bgs.config">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-bgs.client">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-bgs.db">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-bgs.extract">Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-bgs.queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-bgs.reporting">Reporting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#sqlite-error-no-column-named-shape">SQLite Error: no column named shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#no-such-table">No such table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="licensing.html">Licensing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="licensing.html#code-license">Code License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="licensing.html#data-sources">Data Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="licensing.html#bgs">BGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="licensing.html#future-integration">Future Integration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Mineral Extraction Database</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ingestion.html">Ingestion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licensing.html">Licensing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="installation.html" title="next chapter">Installation</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

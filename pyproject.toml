@@ -11,8 +11,8 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 
 authors = [
-  { name = "Sagar Kargathra" },
-  { name = "Anish Koyamparambath" }
+  { name = "Sagar Kargathra"},
+  { name = "Anish Koyamparambath"}
 ]
 
 maintainers = [

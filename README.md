@@ -86,5 +86,5 @@ You should choose one canonical table name for BGS and use it consistently.
 
 ## License
 
-Add your license file at the repo root. If the code is GPL-3.0, keep `LICENSE` as GPL-3.0.
+Add your license file at the repo root. If the code is MIT, keep `LICENSE` as MIT.
 If you need separate licensing for data, document it explicitly in `docs/`.
