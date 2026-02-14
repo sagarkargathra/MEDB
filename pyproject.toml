@@ -48,5 +48,5 @@ where = ["src"]
 include = ["bgs*"]
 
 [project.urls]
-Documentation = "https://YOUR_USERNAME.github.io/mineral-extraction-database"
+Documentation = "https://mineral-extraction-database.readthedocs.io/en/latest/index.html"
 

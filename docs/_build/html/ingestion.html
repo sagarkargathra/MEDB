@@ -1,94 +1,48 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingestion &mdash; Mineral Extraction Database 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
-    <title>Ingestion &#8212; Mineral Extraction Database 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
-    <script src="_static/documentation_options.js?v=8d563738"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Reporting" href="reporting.html" />
-    <link rel="prev" title="Architecture" href="architecture.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
+    <link rel="prev" title="Architecture" href="architecture.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
-
-          <div class="body" role="main">
-            
-  <section id="ingestion">
-<h1>Ingestion<a class="headerlink" href="#ingestion" title="Link to this heading">¶</a></h1>
-<section id="purpose">
-<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h2>
-<p>The ingestion process reads records from the BGS OGC API
-and writes them into a local SQLite archive.</p>
-</section>
-<section id="entry-point">
-<h2>Entry Point<a class="headerlink" href="#entry-point" title="Link to this heading">¶</a></h2>
-<p>The main function is:</p>
-<p><code class="docutils literal notranslate"><span class="pre">build_master_database</span></code></p>
-<p>It performs:</p>
-<ul class="simple">
-<li><p>API pagination</p></li>
-<li><p>Batch aggregation</p></li>
-<li><p>Conversion to DataFrame</p></li>
-<li><p>Schema alignment</p></li>
-<li><p>SQLite insertion</p></li>
-<li><p>Index creation</p></li>
-</ul>
-</section>
-<section id="schema-alignment">
-<h2>Schema Alignment<a class="headerlink" href="#schema-alignment" title="Link to this heading">¶</a></h2>
-<p>Before appending new batches, the module checks
-whether new columns exist in the API response.</p>
-<p>If new fields are detected, missing columns are added
-using <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>.</p>
-<p>This prevents errors such as:</p>
-<ul class="simple">
-<li><p>no column named shape</p></li>
-</ul>
-</section>
-<section id="derived-columns">
-<h2>Derived Columns<a class="headerlink" href="#derived-columns" title="Link to this heading">¶</a></h2>
-<p>The field <code class="docutils literal notranslate"><span class="pre">year_clean</span></code> is derived from the first four
-characters of the <code class="docutils literal notranslate"><span class="pre">year</span></code> column.</p>
-</section>
-</section>
-
-
-          </div>
           
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Mineral Extraction Database</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+          <a href="index.html" class="icon icon-home">
+            Mineral Extraction Database
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
@@ -107,51 +61,98 @@ characters of the <code class="docutils literal notranslate"><span class="pre">y
 <li class="toctree-l1"><a class="reference internal" href="licensing.html">Licensing</a></li>
 </ul>
 
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="architecture.html" title="previous chapter">Architecture</a></li>
-      <li>Next: <a href="reporting.html" title="next chapter">Reporting</a></li>
-  </ul></li>
-</ul>
-</div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-      |
-      <a href="_sources/ingestion.rst.txt"
-          rel="nofollow">Page source</a>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mineral Extraction Database</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Ingestion</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ingestion.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ingestion">
+<h1>Ingestion<a class="headerlink" href="#ingestion" title="Link to this heading"></a></h1>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h2>
+<p>The ingestion process reads records from the BGS OGC API
+and writes them into a local SQLite archive.</p>
+</section>
+<section id="entry-point">
+<h2>Entry Point<a class="headerlink" href="#entry-point" title="Link to this heading"></a></h2>
+<p>The main function is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">build_master_database</span></code></p>
+<p>It performs:</p>
+<ul class="simple">
+<li><p>API pagination</p></li>
+<li><p>Batch aggregation</p></li>
+<li><p>Conversion to DataFrame</p></li>
+<li><p>Schema alignment</p></li>
+<li><p>SQLite insertion</p></li>
+<li><p>Index creation</p></li>
+</ul>
+</section>
+<section id="schema-alignment">
+<h2>Schema Alignment<a class="headerlink" href="#schema-alignment" title="Link to this heading"></a></h2>
+<p>Before appending new batches, the module checks
+whether new columns exist in the API response.</p>
+<p>If new fields are detected, missing columns are added
+using <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>.</p>
+<p>This prevents errors such as:</p>
+<ul class="simple">
+<li><p>no column named shape</p></li>
+</ul>
+</section>
+<section id="derived-columns">
+<h2>Derived Columns<a class="headerlink" href="#derived-columns" title="Link to this heading"></a></h2>
+<p>The field <code class="docutils literal notranslate"><span class="pre">year_clean</span></code> is derived from the first four
+characters of the <code class="docutils literal notranslate"><span class="pre">year</span></code> column.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reporting.html" class="btn btn-neutral float-right" title="Reporting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
-    
+  <hr/>
 
-    
-  </body>
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>
