@@ -5,3 +5,20 @@
 *.sqlite3
 *.db
 ~%*
+
+# Editors
+.vscode/
+.idea/
+.eclipse
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# lock-files
+*~lock*
+
+# build output folder
+build/
+dist/

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mineral-extraction-database"
+version = "1.0.0"
+description = "Mineral Extraction Database (MEDB): A structured pipeline for ingesting mineral production data from BGS and other sources into a local SQLite archive with reporting utilities."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Sagar Kargathra" },
+  { name = "Anish Koyamparambath" }
+]
+
+maintainers = [
+  { name = "Anish Koyamparambath" }
+]
+
+keywords = [
+  "mineral extraction",
+  "BGS",
+  "USGS",
+  "OGC API",
+  "mining data",
+  "SQLite",
+  "data engineering"
+]
+
+dependencies = [
+  "pandas>=2.1",
+  "requests>=2.31"
+]
+
+[project.optional-dependencies]
+docs = [
+  "sphinx>=7.2",
+  "alabaster>=0.7.13"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bgs*"]
+
+[project.urls]
+Documentation = "https://YOUR_USERNAME.github.io/mineral-extraction-database"
+
