@@ -7,9 +7,9 @@
 ~%*
 *.xls
 *.xlsx
-*.csv
 *.json
 *.log
+load_bafu/ecospold/
 
 # Editors
 .vscode/
