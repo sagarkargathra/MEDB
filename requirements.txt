@@ -1,6 +1,5 @@
-lxml>=4.9
-openpyxl>=3.1
-pandas>=2.0
-tqdm>=4.66
-bw2data>=4
-bw2io>=0.9.17
+sphinx>=7.2
+sphinx_rtd_theme>=2.0.0
+alabaster>=0.7.13
+pandas>=2.1
+requests>=2.31
